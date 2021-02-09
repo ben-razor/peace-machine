@@ -43,6 +43,7 @@ $(function() {
      */
     $rotatable.bind('mouseout touchend', function(e) {
         e.stopPropagation();
+        $activeElem = null;
     });
 
     /**

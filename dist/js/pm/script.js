@@ -138,7 +138,14 @@ $(function() {
 
             var rot = Math.atan2(relYRot, relXRot);
             var val = rotToValue(rot);
-            setValue($elem.attr("id"), val);
+            let id = $elem.attr('id');
+
+            if(id === 'pm-control-uppers') {
+                let dBVal = physii.math.loneRanger(val, 0, 1, -24, 0);
+                val = dBToMul(dBVal);
+            }
+
+            setValue(id, val);
             
             if(rot > 3 * Math.PI / 4) {
                 rot = 3 * Math.PI / 4;
@@ -172,6 +179,21 @@ $(function() {
     }
 
     /**
+     * Converts a value in dB to a multiplier.
+     * 
+     * E.g. 
+     *   0dB -> 1
+     *   -6dB -> 0.5
+     * 
+     * @param {number} dB 
+     */
+    function dBToMul(dB) {
+        let value = Math.pow(10, dB / 20)
+        return value;
+    }
+
+
+    /**
      * Send a changed UI value to any connected backend. Save the value
      * for recovery across sessions.
      * 
@@ -182,12 +204,6 @@ $(function() {
         storage.setItem(key, JSON.stringify(value));
 
         if(backend) {
-            console.log(key);
-            if(key === 'pm-control-uppers') { 
-                // Make volume control in db (-0.25 on dial -> 0.5 * volume)
-                value = physii.math.loneRanger(value, 0, 1, 0.6, 1);  
-                value = Math.pow(2, -10 * (1 - value));
-            }
             backend.handleFloat(key, value);
         }
     }

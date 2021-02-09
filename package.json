@@ -1,0 +1,27 @@
+{
+  "name": "peace-machine",
+  "version": "1.0.0",
+  "description": "A mellow sound generator for the web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ben-razor/peace-machine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ben-razor/peace-machine/issues"
+  },
+  "homepage": "https://github.com/ben-razor/peace-machine#readme",
+  "dependencies": {
+    "babel": "^6.23.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "babel-preset-minify": "^0.5.1"
+  }
+}

@@ -21,7 +21,7 @@ $(function() {
      * Interface object to pass control information to.
      * For example, provided by a mobile WebView
      */
-    var interface = window["PeaceMachineInterface"];
+    var interface = window["PeaceMachineInterface"] || pMachine.audio;
 
     storage = window.localStorage;
 
@@ -182,7 +182,13 @@ $(function() {
         storage.setItem(key, JSON.stringify(value));
 
         if(interface) {
-            interface.handleFloat($elem.attr("id"), value);
+            let id = $elem.attr('id');
+            if(id === 'pm-control-uppers') {
+                // Make volume control in db (-0.25 on dial -> 0.5 * volume)
+                value = physii.math.loneRanger(value, 0, 1, 0.6, 1);  
+                value = Math.pow(2, -10 * (1 - value));
+            }
+            interface.handleFloat(id, value);
         }
     }
 

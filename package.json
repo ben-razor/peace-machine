@@ -4,6 +4,7 @@
   "description": "A mellow sound generator for the web.",
   "main": "index.js",
   "scripts": {
+    "build": "./process-js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,11 +18,12 @@
   },
   "homepage": "https://github.com/ben-razor/peace-machine#readme",
   "dependencies": {
-    "babel": "^6.23.0"
+    "core-js": "^3.8.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
     "babel-preset-minify": "^0.5.1"
   }
 }

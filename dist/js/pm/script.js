@@ -21,9 +21,9 @@ $(function() {
      * Interface object to pass control information to.
      * For example, provided by a mobile WebView
      */
-    var interface = window["PeaceMachineInterface"] || pMachine.audio;
+    var backend = window["PeaceMachineInterface"] || pMachine.audio;
 
-    storage = window.localStorage;
+    var storage = window.localStorage;
 
     /**
      * When a rotatable element (knob) is touched, we set it as
@@ -121,7 +121,7 @@ $(function() {
      */
     function handleMove(x, y) {
         if($activeElem) {
-            $elem = $activeElem;
+            var $elem = $activeElem;
             var w = $elem.width();
             var h = $elem.height();
             var relX = 0, relY = 0;
@@ -165,14 +165,14 @@ $(function() {
             var rot = valueToRot(val);
             $elem.css('transform', controlTranslation + ' rotate(' + rot + 'rad)');
 
-            if(interface) {
-                interface.handleFloat(id, val);
+            if(backend) {
+                backend.handleFloat(id, val);
             }
         }
     }
 
     /**
-     * Send a changed UI value to any connected interface. Save the value
+     * Send a changed UI value to any connected backend. Save the value
      * for recovery across sessions.
      * 
      * @param {string} key 
@@ -181,20 +181,20 @@ $(function() {
     function setValue(key, value) {
         storage.setItem(key, JSON.stringify(value));
 
-        if(interface) {
-            let id = $elem.attr('id');
-            if(id === 'pm-control-uppers') {
+        if(backend) {
+            console.log(key);
+            if(key === 'pm-control-uppers') { 
                 // Make volume control in db (-0.25 on dial -> 0.5 * volume)
                 value = physii.math.loneRanger(value, 0, 1, 0.6, 1);  
                 value = Math.pow(2, -10 * (1 - value));
             }
-            interface.handleFloat(id, value);
+            backend.handleFloat(key, value);
         }
     }
 
     /**
      * Recover stored UI values from storage to initialize UI and any connected
-     * interfaces.
+     * backends.
      * 
      * @param {string} key 
      */

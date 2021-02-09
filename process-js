@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+app_name=peace-machine
+android_proj=PeaceMachineAndroid
+
+android_dir=../../AndroidStudioProjects/$app_name-app/$android_proj/app/src/main/assets
+
+babel dist/js -d dist/js-babel
+
+rsync -avz ./dist/* ../$app_name-deploy-temp/dist/
+rsync -avz ./dist/js-babel/ ../$app_name-deploy-temp/dist/js/
+rsync -avz ./dist/* $android_dir/web/
+rsync -avz ./dist/js-babel/ $android_dir/web/js/
+sed -i "/delete-on-mobile/d" $android_dir/web/index.html
+cd ../$app_name-deploy-temp
+# firebase hosting:channel:deploy babel

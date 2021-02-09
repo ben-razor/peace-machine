@@ -164,6 +164,10 @@ $(function() {
      * from storage.
      */
     function initUI() {
+        if(isMobile) {
+            $('.web-show').css('display', '');
+        }
+
         var ids = ["pm-control-uppers", "pm-control-downers"];
 
         for(var i = 0; i < ids.length; i++) {
@@ -177,6 +181,10 @@ $(function() {
                 backend.handleFloat(id, val);
             }
         }
+    }
+
+    function isMobile() {
+        return "PeaceMachineInterface" in window;
     }
 
     /**

@@ -1,13 +1,15 @@
-$(function() {
+'use strict';
+
+/** @suppress {duplicate} */
+var pMachine = pMachine || {};
+
+(function(pm) {
     /*
      * When a rotatable element is touched, we set it as
      * the active element, all movement on the ui will then be
      * forwarded to that element.
      */
     var $activeElem = null;
-
-    var $rotatable = $('.rotatable');
-
     /** Touch / mouse position x */
     var targetX = 0;
 
@@ -25,60 +27,64 @@ $(function() {
 
     var storage = window.localStorage;
 
-    /**
-     * When a rotatable element (knob) is touched, we set it as
-     * the active element, all movement on the ui will then be
-     * forwarded to that element via the handleMove function until
-     * the touch is lifted from the ui.
-     */
-    $rotatable.bind('mousedown touchstart', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $activeElem = $(e.target);
+    var $rotatable = null;
+    $(function() {
+        $rotatable = $('.rotatable'); 
+
+        /**
+         * When a rotatable element (knob) is touched, we set it as
+         * the active element, all movement on the ui will then be
+         * forwarded to that element via the handleMove function until
+         * the touch is lifted from the ui.
+         */
+        $rotatable.bind('mousedown touchstart', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $activeElem = $(e.target);
+        });
+
+        /**
+         * Once a control is active we want it to stay active even if
+         * the mouse or finger leaves the element.
+         */
+        $rotatable.bind('touchend', function(e) {
+            e.stopPropagation();
+            $activeElem = null;
+        });
+    
+        /**
+         * Bind mouse/touch move events to the body. The position
+         * is passed to the handleMove function wich will carry out
+         * actions on any element that has been activated by a mouse
+         * or touch down event.
+         */
+        $(document.body).bind('mousemove touchmove', function(e) {
+            var touchInfo = e;
+            if(isTouch(e)) {
+                touchInfo = e.originalEvent.touches[0];
+            }
+            targetX = touchInfo.pageX;
+            targetY = touchInfo.pageY;
+            handleMove(targetX, targetY);
+            e.stopPropagation();
+        });
+
+       
+        /**
+         * Stop responding to move events once the touch or mouse is
+         * lifted from the ui.
+         */
+        $(document.body).bind('mouseup mouseleave', function(e) {
+            $activeElem = null;
+        })
     });
-
-    /**
-     * Once a control is active we want it to stay active even if
-     * the mouse or finger leaves the element.
-     */
-    $rotatable.bind('mouseout touchend', function(e) {
-        e.stopPropagation();
-        $activeElem = null;
-    });
-
-    /**
-     * Stop propogation of mouse out events on background as we
-     * want a drag that started on one element to continue even
-     * when the mouse passes out of the background to a different
-     * element with the button still pressed.
-     */
-    $('#pm-screen-background').bind('mouseout', function(e) {
-        e.stopPropagation();
-    })
-
+   
     /**
      * @param {event} e Check if event was touch not mouse
      */
     function isTouch(e) {
         return e.originalEvent && e.originalEvent.touches;
     }
-
-    /**
-     * Bind mouse/touch move events to the body. The position
-     * is passed to the handleMove function wich will carry out
-     * actions on any element that has been activated by a mouse
-     * or touch down event.
-     */
-    $(document.body).bind('mousemove touchmove', function(e) {
-        var touchInfo = e;
-        if(isTouch(e)) {
-            touchInfo = e.originalEvent.touches[0];
-        }
-        targetX = touchInfo.pageX;
-        targetY = touchInfo.pageY;
-        handleMove(targetX, targetY);
-        e.stopPropagation();
-    });
 
     /**
      * Converts canvas rotation to continuous cw rotation from 
@@ -164,7 +170,7 @@ $(function() {
      * from storage.
      */
     function initUI() {
-        if(isMobile) {
+        if(!isMobile()) {
             $('.web-show').css('display', '');
         }
 
@@ -228,13 +234,13 @@ $(function() {
         return val;
     }
 
-    /**
-     * Stop responding to move events once the touch or mouse is
-     * lifted from the ui.
-     */
-    $(document.body).bind('mouseup mouseout', function(e) {
-        $activeElem = null;
-    });
-
+    function turnOn() {
+        pm.audio.turnOn();
+        let $landingPage = $('.pm-landing-page');
+        $landingPage.fadeOut(1000, function() {
+            $landingPage.hide();
+        });
+    }
+    pm.turnOn = turnOn;
     initUI();
-});
+})(pMachine);

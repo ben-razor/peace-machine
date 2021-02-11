@@ -1,3 +1,8 @@
+@font-face {
+    font-family: HippieMovement;
+    src: url(../font/hippie-movement/Hippie\ Movement.ttf);
+}
+
 .pm-screen-background {
     width: 100%;
     height: 100vh;
@@ -38,6 +43,56 @@
     height: 100%;
 }
 
+.pm-landing-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsl(180, 50%, 50%);
+    background-image: url(../img/pm-screen-grass-1.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.pm-rays-bg {
+    background-image: url(../img/pm-screen-rays-1.png);
+    background-position-x: -150px;
+    background-position-y: -150px;
+    background-repeat: no-repeat;
+}
+
+.pm-landing-page-panel {
+    background-color: hsl(90, 50%, 50%);
+    width: 70%;
+    height: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.pm-turn-on-button {
+    font-family: HippieMovement;
+    font-size: 200%;
+    width: 50%;
+    height: 20%;
+    margin: auto;
+    background-color: hsl(90, 100%, 20%);
+    color: hsl(90, 80%, 90%);
+    border-radius: 10px;
+}
+
+.pm-landing-header {
+    width: 100%;
+    height: 50%;
+    display:flex;
+    flex-direction: row;
+}
+
 .header {
     flex-grow: 1;
 }
@@ -62,7 +117,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  font-family: 'Helvetica', Arial;
+  font-family: HippieMovement, Arial;
 }
 
 #wrapper {
@@ -101,6 +156,21 @@ body {
     background-image: url(../img/pm-screen-logo-1.svg);
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.pm-logo-landing-page {
+    background-image: url(../img/pm-screen-logo-1.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+}
+
+.pm-landing-quote {
+    color: hsl(90, 80%, 90%);
+    font-size: 2em;
+    padding: 1em 0 0 1em;
 }
 
 .pm-rays {

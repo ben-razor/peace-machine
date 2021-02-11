@@ -45,12 +45,14 @@ var pMachine = pMachine || {};
     audio.startBrownNoise = startBrownNoise;
 
     function handleFloat(id, val) {
-        console.log(JSON.stringify([id, val]));
-        if(id == 'pm-control-downers') {
-            lpFilter.frequency.value = val * 800;
-        }
-        else if(id == 'pm-control-uppers') {
-            gain.gain.value = val;
+        if(audioContext) {
+            console.log(JSON.stringify([id, val]));
+            if(id == 'pm-control-downers') {
+                lpFilter.frequency.value = val * 800;
+            }
+            else if(id == 'pm-control-uppers') {
+                gain.gain.value = val;
+            }
         }
     }
     audio.handleFloat = handleFloat;

@@ -78,7 +78,7 @@ var pMachine = pMachine || {};
             $activeElem = null;
         })
     });
-   
+  
     /**
      * @param {event} e Check if event was touch not mouse
      */
@@ -236,11 +236,14 @@ var pMachine = pMachine || {};
 
     function turnOn() {
         pm.audio.turnOn();
-        let $landingPage = $('.pm-landing-page');
-        $landingPage.fadeOut(1000, function() {
+        initUI();
+        let $landingPage = $('.pm-landing');
+        $landingPage.fadeOut(2000, function() {
             $landingPage.hide();
         });
     }
     pm.turnOn = turnOn;
+
     initUI();
+
 })(pMachine);

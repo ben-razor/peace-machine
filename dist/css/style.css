@@ -43,11 +43,20 @@
     height: 100%;
 }
 
+.pm-landing-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-image: url(../img/bg/sky-2.jpg);
+}
+
 .pm-landing-page {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: hsl(180, 50%, 50%);
     background-image: url(../img/pm-screen-grass-1.png);
     background-repeat: repeat-x;
     background-position: bottom;
@@ -66,13 +75,13 @@
 }
 
 .pm-landing-page-panel {
-    background-color: hsl(90, 50%, 50%);
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     margin: auto;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 30px;
+    border-left: 10px solid hsl(90, 20%, 80%);
 }
 
 .pm-turn-on-button {
@@ -81,9 +90,14 @@
     width: 50%;
     height: 20%;
     margin: auto;
-    background-color: hsl(90, 100%, 20%);
+    background-color: hsl(180, 80%, 30%);
     color: hsl(90, 80%, 90%);
-    border-radius: 10px;
+    border-radius: 10% 50%;
+    border-color: hsl(180, 80%, 80%);
+}
+
+.pm-turn-on-button:hover, .pm-turn-on-button:active, .pm-turn-on-button:focus {
+    outline: none;
 }
 
 .pm-landing-header {
@@ -169,8 +183,9 @@ body {
 
 .pm-landing-quote {
     color: hsl(90, 80%, 90%);
-    font-size: 2em;
-    padding: 1em 0 0 1em;
+    font-size: 2.5em;
+    padding: 10px 0 0 10px;
+    text-shadow: 3px 3px hsl(180, 80%, 30%);
 }
 
 .pm-rays {

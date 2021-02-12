@@ -38,23 +38,35 @@ var pMachine = pMachine || {};
 
         lpFilter = audioContext.createBiquadFilter();
         gain = audioContext.createGain();
+        gain.gain.value = 0;
+
         gain.connect(audioContext.destination);
         lpFilter.connect(gain);
         brownNoise.connect(lpFilter);
     }
     audio.startBrownNoise = startBrownNoise;
 
-    function handleFloat(id, val) {
+    /**
+     * Handle a numeric value.
+     * 
+     * @param {string} id 
+     * @param {number} val 
+     * @param {number} t Linear ramp to value over this time period
+     */
+    function handleFloat(id, val, t) {
+        t = t || 0.001;
+
         if(audioContext) {
             console.log(JSON.stringify([id, val]));
             if(id == 'pm-control-downers') {
-                lpFilter.frequency.value = val * 800;
+                lpFilter.frequency.linearRampToValueAtTime(val * 800, t);
             }
             else if(id == 'pm-control-uppers') {
-                gain.gain.value = val;
+                gain.gain.linearRampToValueAtTime(val, t);
             }
         }
     }
+
     audio.handleFloat = handleFloat;
 
 })(pMachine);

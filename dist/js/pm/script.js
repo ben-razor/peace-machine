@@ -184,7 +184,7 @@ var pMachine = pMachine || {};
             $elem.css('transform', controlTranslation + ' rotate(' + rot + 'rad)');
 
             if(backend) {
-                backend.handleFloat(id, val);
+                backend.handleFloat(id, val, 1);
             }
         }
     }

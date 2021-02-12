@@ -238,11 +238,21 @@ var pMachine = pMachine || {};
         pm.audio.turnOn();
         initUI();
         let $landingPage = $('.pm-landing');
-        $landingPage.fadeOut(2000, function() {
+        $landingPage.fadeOut(1000, function() {
             $landingPage.hide();
         });
     }
     pm.turnOn = turnOn;
+
+    function dropOut() {
+        pm.audio.turnOff();
+
+        let $landingPage = $('.pm-landing');
+        $landingPage.fadeIn(2000, function() {
+            $landingPage.show();
+        });
+    }
+    pm.dropOut = dropOut;
 
     initUI();
 

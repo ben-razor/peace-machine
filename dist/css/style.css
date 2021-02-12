@@ -96,8 +96,14 @@
     border-color: hsl(180, 80%, 80%);
 }
 
-.pm-turn-on-button:hover, .pm-turn-on-button:active, .pm-turn-on-button:focus {
+button:hover, button:active, button:focus {
     outline: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; 
 }
 
 .pm-landing-header {
@@ -138,6 +144,16 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .rotatable {
@@ -235,6 +251,23 @@ body {
     background-image: url(../img/pm-screen-stem-1.svg);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.pm-drop-out {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.pm-drop-out button {
+    font-family: HippieMovement;
+    font-size: 200%;
+    background-color: hsl(130, 80%, 30%);
+    color: hsl(90, 80%, 90%);
+    border-radius: 10% 50%;
+    border-color: hsl(130, 80%, 80%);
+    padding: 0.5em;
+    margin: 5px;
 }
 
 #pm-control-downers {

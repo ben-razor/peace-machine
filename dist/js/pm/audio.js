@@ -8,19 +8,35 @@ var pMachine = pMachine || {};
     var audioContext = null;
     var lpFilter = null;
     var gain = null;
+    var stoppingAudioTimer = null;
 
     function turnOn() {
+        clearTimeout(stoppingAudioTimer);
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioContext = new AudioContext();
         startBrownNoise();
     }
     audio.turnOn = turnOn;
 
+    function turnOff() {
+        let seconds = 2;
+
+        if(audioContext) {
+            let now = audioContext.currentTime;
+            gain.gain.linearRampToValueAtTime(0, now + seconds);
+        }
+
+        stoppingAudioTimer = setTimeout(function() {
+            audioContext.close();
+            audioContext = null;
+        }, seconds * 1000);
+    }
+    audio.turnOff = turnOff;
+
     function startBrownNoise() {
 
         var bufferSize = 4096;
         var brownNoise = (function() {
-            console.log("Starting playing noise");
             var lastOut = 0.0;
             var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
             node.onaudioprocess = function(e) {
@@ -54,15 +70,17 @@ var pMachine = pMachine || {};
      * @param {number} t Linear ramp to value over this time period
      */
     function handleFloat(id, val, t) {
-        t = t || 0.001;
+        t = t || 0.01;
 
         if(audioContext) {
+            let now = audioContext.currentTime;
+
             console.log(JSON.stringify([id, val]));
             if(id == 'pm-control-downers') {
-                lpFilter.frequency.linearRampToValueAtTime(val * 800, t);
+                lpFilter.frequency.linearRampToValueAtTime(val * 800, now + t);
             }
             else if(id == 'pm-control-uppers') {
-                gain.gain.linearRampToValueAtTime(val, t);
+                gain.gain.linearRampToValueAtTime(val, now + t);
             }
         }
     }

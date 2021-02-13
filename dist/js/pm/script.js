@@ -17,7 +17,7 @@ var pMachine = pMachine || {};
     var targetY = 0;
 
     /** Translation of control before rotation dynamically applied */
-    var controlTranslation = 'translate(-50%, 0%) ';
+    var controlTranslation = 'translate(-50%, -50%) ';
 
     /**
      * Interface object to pass control information to.

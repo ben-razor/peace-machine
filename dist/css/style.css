@@ -38,7 +38,6 @@
 
 .pm-basis {
     position: relative;
-    overflow: hidden;
     width: 100%;
     height: 100%;
 }
@@ -86,10 +85,10 @@
 
 .pm-turn-on-button {
     font-family: HippieMovement;
-    font-size: 200%;
+    font-size: 160%;
     width: 50%;
-    height: 20%;
     margin: auto;
+    padding: 1em;
     background-color: hsl(180, 80%, 30%);
     color: hsl(90, 80%, 90%);
     border-radius: 10% 50%;
@@ -127,15 +126,24 @@ button:hover, button:active, button:focus {
 
 .pm-flowers {
     flex-grow: 4;
+    margin-top: 20%;
+    overflow: visible;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
   height: 100vh;
   font-family: HippieMovement, Arial;
 }
@@ -245,12 +253,12 @@ body {
 .pm-stem {
     position: absolute;
     width: 10%;
-    bottom: 15%;
-    top: 18%;
+    bottom: 0;
+    top: 0;
     transform: translateX(-86%);
-    background-image: url(../img/pm-screen-stem-1.svg);
+    background-image: url(../img/pm-screen-stem-1.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 
 .pm-drop-out {
@@ -261,7 +269,7 @@ body {
 
 .pm-drop-out button {
     font-family: HippieMovement;
-    font-size: 200%;
+    font-size: 140%;
     background-color: hsl(130, 80%, 30%);
     color: hsl(90, 80%, 90%);
     border-radius: 10% 50%;
@@ -286,10 +294,43 @@ body {
     left: 76%;
 }
 
+@media screen and (max-width: 992px) {
+    .pm-landing-quote {
+        font-size: 1.5em;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .pm-landing-page-panel {
+        width: 80%;
+        height: 80%;
+    }
+
+    .pm-landing-quote {
+        font-size: 2em;
+    }
+}
+
 @media screen and (max-width: 567px) {
+    .pm-landing-page-panel {
+        width: 90%;
+        height: 90%;
+    }
+    .pm-landing-header {
+        flex-direction: column;
+    }
+
+    .pm-turn-on-button {
+        width: 70%;
+        font-size: 180%;
+        padding: 0.5em;
+    }
+
     .pm-screen-foreground {
         flex-direction: column;
     }
+
     .content {
         flex-grow: 4;
     }

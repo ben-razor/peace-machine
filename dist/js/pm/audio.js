@@ -70,8 +70,6 @@ var pMachine = pMachine || {};
      * @param {number} t Linear ramp to value over this time period
      */
     function handleFloat(id, val, t) {
-        t = t || 0.01;
-
         if(audioContext) {
             let now = audioContext.currentTime;
 

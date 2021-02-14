@@ -19,6 +19,12 @@ var pMachine = pMachine || {};
     /** Translation of control before rotation dynamically applied */
     var controlTranslation = 'translate(-50%, -50%) ';
 
+    /** Low value on a db control */
+    var dBControlLow = -30;
+
+    /** High value on a db control */
+    var dBControlHigh = 0;
+
     /**
      * Interface object to pass control information to.
      * For example, provided by a mobile WebView
@@ -148,7 +154,7 @@ var pMachine = pMachine || {};
             let id = $elem.attr('id');
 
             if(id === 'pm-control-uppers') {
-                let dBVal = physii.math.loneRanger(val, 0, 1, -24, 0);
+                let dBVal = physii.math.loneRanger(val, 0, 1, dBControlLow, dBControlHigh);
                 val = dBToMul(dBVal);
             }
 
@@ -180,12 +186,16 @@ var pMachine = pMachine || {};
             var id = ids[i];
             var $elem = $('#' + id);
             var val = getValue(id);
-            var rot = valueToRot(val);
-            $elem.css('transform', controlTranslation + ' rotate(' + rot + 'rad)');
-
+ 
             if(backend) {
                 backend.handleFloat(id, val, 1);
             }
+           
+            if(id === 'pm-control-uppers') {
+                val = mulToVal(val, dBControlLow, dBControlHigh);
+            }
+            var rot = valueToRot(val);
+            $elem.css('transform', controlTranslation + ' rotate(' + rot + 'rad)');
         }
     }
 
@@ -203,10 +213,35 @@ var pMachine = pMachine || {};
      * @param {number} dB 
      */
     function dBToMul(dB) {
-        let value = Math.pow(10, dB / 20)
+        let value = 10**(dB / 20)
         return value;
     }
 
+    /**
+     * Converts a logarithic multiplier to a linear value
+     * between 0 and 1 for display on a control.
+     * 
+     * E.g. 0.25 -> -12dB -> 0.5 if the scale is from -24dB to 0.
+     * 
+     * @param {number} mul 
+     * @param {number} dBLow
+     * @param {number} dBHigh
+     */
+    function mulToVal(mul, dBLow, dbHigh) {
+        let val = mulTodB(mul)
+        val = physii.math.loneRanger(val, dBLow, dbHigh, 0, 1);
+        return val;
+    }
+
+    /**
+     * Converts a multiplier to dB. For example, -6dB is approx 
+     * eqivalent to 0.5 * volume.
+     * 
+     * @param {number} mul 
+     */
+    function mulTodB(mul) {
+        return 20 * Math.log10(mul);
+    }
 
     /**
      * Send a changed UI value to any connected backend. Save the value
@@ -219,7 +254,7 @@ var pMachine = pMachine || {};
         storage.setItem(key, JSON.stringify(value));
 
         if(backend) {
-            backend.handleFloat(key, value);
+            backend.handleFloat(key, value, 0.01);
         }
     }
 
@@ -235,7 +270,7 @@ var pMachine = pMachine || {};
     }
 
     function turnOn() {
-        pm.audio.turnOn();
+        backend.turnOn();
         initUI();
         let $landingPage = $('.pm-landing');
         $landingPage.fadeOut(1000, function() {
@@ -245,7 +280,7 @@ var pMachine = pMachine || {};
     pm.turnOn = turnOn;
 
     function dropOut() {
-        pm.audio.turnOff();
+        backend.turnOff();
 
         let $landingPage = $('.pm-landing');
         $landingPage.fadeIn(2000, function() {

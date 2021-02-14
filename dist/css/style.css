@@ -66,6 +66,30 @@
     z-index: 100;
 }
 
+.pm-tune-in-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-image: url(../img/bg/sky-2.jpg);
+}
+
+.pm-tune-in-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(../img/pm-screen-grass-1.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 101;
+}
+
 .pm-rays-bg {
     background-image: url(../img/pm-screen-rays-1.png);
     background-position-x: -150px;
@@ -261,21 +285,36 @@ body {
     background-size: 100% 100%;
 }
 
-.pm-drop-out {
+.pm-tune-in-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 5px;
+}
+
+.pm-tune-in-button button {
+    font-size: 140%;
+    background-color: hsl(210, 70%, 50%);
+    color: hsl(90, 80%, 90%);
+    border-radius: 50% 10%;
+    border-color: hsl(210, 80%, 90%);
+    padding: 0.5em;
+}
+
+.pm-drop-out-button {
     position: absolute;
     right: 0;
     bottom: 0;
+    margin: 5px;
 }
 
-.pm-drop-out button {
-    font-family: HippieMovement;
+.pm-drop-out-button button {
     font-size: 140%;
     background-color: hsl(130, 80%, 30%);
     color: hsl(90, 80%, 90%);
     border-radius: 10% 50%;
     border-color: hsl(130, 80%, 80%);
     padding: 0.5em;
-    margin: 5px;
 }
 
 #pm-control-downers {

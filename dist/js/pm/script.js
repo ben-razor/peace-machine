@@ -283,11 +283,30 @@ var pMachine = pMachine || {};
         backend.turnOff();
 
         let $landingPage = $('.pm-landing');
-        $landingPage.fadeIn(2000, function() {
+        $landingPage.fadeIn(1600, function() {
             $landingPage.show();
         });
     }
     pm.dropOut = dropOut;
+
+    function tuneIn() {
+        let $landingPage = $('.pm-landing');
+        let $tuneInPage = $('.pm-tune-in');
+        $tuneInPage.fadeIn(1000, function() {
+            $tuneInPage.show();
+            $landingPage.hide();
+        })
+    }
+    pm.tuneIn = tuneIn;
+
+    function tuneOut() {
+        let $tuneInPage = $('.pm-tune-in');
+        $tuneInPage.fadeOut(1600, function() {
+            $tuneInPage.hide();
+        })
+    }
+    pm.tuneOut = tuneOut;
+
 
     initUI();
 

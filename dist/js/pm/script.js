@@ -4,6 +4,32 @@
 var pMachine = pMachine || {};
 
 (function(pm) {
+
+    pm.config = {
+        "vibes": {
+            "ocean_beach": {
+                "text": "Ocean Beach",
+                "img": "beach.jpg",
+                "audio": "beach.ogg"
+            },
+            "zabriskie_point": {
+                "text": "Zabriskie Point",
+                "img": "desert.jpg",
+                "audio": "desert.ogg"
+            },
+            "rabbit_hole": {
+                "text": "Rabbit Hole",
+                "img": "garden.jpg",
+                "audio": "garden.ogg"
+            },
+            "bummer_trip": {
+                "text": "Bummer Trip",
+                "img": "bummer_trip.jpg",
+                "audio": "bummer_trip.ogg"
+            }
+        }
+    };
+
     /*
      * When a rotatable element is touched, we set it as
      * the active element, all movement on the ui will then be

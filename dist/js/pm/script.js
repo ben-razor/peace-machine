@@ -315,12 +315,33 @@ var pMachine = pMachine || {};
     }
     pm.dropOut = dropOut;
 
+    function initVibesSwiper() {
+        const swiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            autoHeight: true,
+          
+            // If we need pagination
+            pagination: {
+              el: '.swiper-pagination',
+            },
+          
+            // Navigation arrows
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+        });
+    }
+    
     function tuneIn() {
         let $landingPage = $('.pm-landing');
         let $tuneInPage = $('.pm-tune-in');
+
         $tuneInPage.fadeIn(1000, function() {
             $tuneInPage.show();
             $landingPage.hide();
+            initVibesSwiper();
         })
     }
     pm.tuneIn = tuneIn;

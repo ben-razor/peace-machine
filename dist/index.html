@@ -12,6 +12,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
     <link rel="manifest" href="img/icon/site.webmanifest">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </head>
   <body class="no-select">
     <div class="pm-screen-background">
@@ -81,13 +87,38 @@
           <div class="pm-tune-in-header">
             <div class="pm-logo-tune-in-page"></div>
             <div class="pm-tune-in-quote">
-              "Downers "
+              "Downers Control - No highs &#x21b7; Super highs"
+            </div>
+            <div class="pm-tune-in-quote">
+              "Uppers Control - Peace &#x21b7; Loud"
             </div>
           </div>
 
           <div class="pm-tune-in-controls">
             <div class="pm-vibes-header">Vibes</div>
-            <div class="pm-vibes-selector">Choose</div>
+            <div class="pm-vibes-selector">
+              <!-- Slider main container -->
+              <div class="swiper-container">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                  <!-- Slides -->
+                  <div class="swiper-slide"><div class="pm-vibe-panel beach">Beach</div></div>
+                  <div class="swiper-slide"><div class="pm-vibe-panel desert">Zabriskie Point</div></div>
+                  <div class="swiper-slide"><div class="pm-vibe-panel garden">Garden</div></div>
+                  <div class="swiper-slide"><div class="pm-vibe-panel bummer_trip">Bummer Trip</div></div>
+                  ...
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </div>
             <div class="pm-vibes-control">Control</div>
           </div>
 

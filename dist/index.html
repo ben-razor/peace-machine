@@ -70,15 +70,31 @@
     </div>
 
     <div class="pm-tune-in pm-tune-in-bg" style="display: none">
-      <div class="pm-tune-in pm-tune-in-page" style="display: none">
-        <div class="pm-tune-in-page-panel">
+      <div class="pm-tune-in pm-tune-in-page pm-screen-foreground" style="display: none">
+        <div class="header">
+          <div class="pm-basis">
+            <div class="pm-logo">
+            </div>
+          </div>
+        </div>
+        <div class="pm-tune-in-page-panel content">
           <div class="pm-tune-in-header">
             <div class="pm-logo-tune-in-page"></div>
             <div class="pm-tune-in-quote">
-              "This is the page where you tune in!"
+              "Downers "
             </div>
           </div>
-          <button onclick="pMachine.tuneOut()" class="web-show pm-turn-on-button">Return</button>
+
+          <div class="pm-tune-in-controls">
+            <div class="pm-vibes-header">Vibes</div>
+            <div class="pm-vibes-selector">Choose</div>
+            <div class="pm-vibes-control">Control</div>
+          </div>
+
+          <div class="pm-drop-out-button">
+            <button onclick="pMachine.tuneOut()">&#x2698; Get Back &#8680;</button>
+          </div>
+          
         </div>
       </div>
     </div>

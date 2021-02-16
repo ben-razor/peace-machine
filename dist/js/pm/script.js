@@ -314,9 +314,13 @@ var pMachine = pMachine || {};
         });
     }
     pm.dropOut = dropOut;
+    let swiper = null;
 
     function initVibesSwiper() {
-        const swiper = new Swiper('.swiper-container', {
+        if(swiper) {
+            swiper.destroy();
+        }
+        swiper = new Swiper('.swiper-container', {
             // Optional parameters
             direction: 'horizontal',
             autoHeight: true,
@@ -331,6 +335,11 @@ var pMachine = pMachine || {};
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             },
+        });
+
+        swiper.on('slideChange', function() {
+            swiper.updateProgress();
+            console.log('slide changed', swiper.realIndex);
         });
     }
     

@@ -441,6 +441,9 @@ body {
     font-size: 2em;
 }
 
+.pm-vibe-panel.beige_haze{
+    background-image: url(../img/vibes/sunset-1.jpg);
+}
 .pm-vibe-panel.beach {
     background-image: url(../img/vibes/beach-1.jpg);
 }

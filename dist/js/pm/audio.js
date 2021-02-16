@@ -34,7 +34,6 @@ var pMachine = pMachine || {};
     audio.turnOff = turnOff;
 
     function startBrownNoise() {
-
         var bufferSize = 4096;
         var brownNoise = (function() {
             var lastOut = 0.0;
@@ -46,7 +45,7 @@ var pMachine = pMachine || {};
                     var white = Math.random() * 2 - 1;
                     output[i] = (lastOut + (0.02 * white)) / 1.02;
                     lastOut = output[i];
-                    output[i] *= 3.5; // (roughly) compensate for gain
+                    output[i] *= 2; // (roughly) compensate for gain
                 }
             }
             return node;
@@ -59,8 +58,38 @@ var pMachine = pMachine || {};
         gain.connect(audioContext.destination);
         lpFilter.connect(gain);
         brownNoise.connect(lpFilter);
+
+        getData(audioContext, lpFilter);
     }
     audio.startBrownNoise = startBrownNoise;
+
+    let source = null;
+    function getData(audioCtx, connectTo) {
+        source = audioCtx.createBufferSource();
+        let request = new XMLHttpRequest();
+      
+        request.open('GET', 'audio/forest-ambient-loop-1.wav', true);
+      
+        request.responseType = 'arraybuffer';
+      
+        request.onload = function() {
+          var audioData = request.response;
+      
+          audioCtx.decodeAudioData(audioData, function(buffer) {
+              let myBuffer = buffer;
+              source.buffer = myBuffer;
+              source.playbackRate.value = 1; //playbackControl.value;
+              source.connect(connectTo);
+              source.loop = true;
+              source.start(0);
+            },
+      
+            function(e){"Error with decoding audio data" + e.err});
+      
+        }
+      
+        request.send();
+      }
 
     /**
      * Handle a numeric value.

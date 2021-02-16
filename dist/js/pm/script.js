@@ -6,28 +6,38 @@ var pMachine = pMachine || {};
 (function(pm) {
 
     pm.config = {
-        "vibes": {
-            "ocean_beach": {
+        "vibes": [
+            {
+                "id": "beige_haze",
+                "text": "Beige Haze",
+                "img": ".jpg",
+                "audio": "beach.ogg"
+            },
+            {
+                "id": "ocean_beach",
                 "text": "Ocean Beach",
                 "img": "beach.jpg",
                 "audio": "beach.ogg"
             },
-            "zabriskie_point": {
+            {
+                "id": "zabriskie_point",
                 "text": "Zabriskie Point",
                 "img": "desert.jpg",
                 "audio": "desert.ogg"
             },
-            "rabbit_hole": {
+            {
+                "id": "rabbit_hole",
                 "text": "Rabbit Hole",
                 "img": "garden.jpg",
                 "audio": "garden.ogg"
             },
-            "bummer_trip": {
+            {
+                "id": "bummer_trip",
                 "text": "Bummer Trip",
                 "img": "bummer_trip.jpg",
                 "audio": "bummer_trip.ogg"
             }
-        }
+        ]
     };
 
     /*
@@ -339,7 +349,7 @@ var pMachine = pMachine || {};
 
         swiper.on('slideChange', function() {
             swiper.updateProgress();
-            console.log('slide changed', swiper.realIndex);
+            console.log('slide changed', swiper.realIndex, pm.config["vibes"][swiper.realIndex]);
         });
     }
     

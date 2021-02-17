@@ -374,6 +374,14 @@ var pMachine = pMachine || {};
     }
     pm.tuneOut = tuneOut;
 
+    /**
+     * Helper method for backends to get vibe config
+     * the web side.
+     */
+    function getVibesConfig() {
+        return JSON.stringify(pm.config["vibes"]);
+    }
+    pm.getVibesConfig = getVibesConfig;
 
     initUI();
 

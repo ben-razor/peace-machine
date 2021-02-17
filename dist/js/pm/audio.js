@@ -111,7 +111,11 @@ var pMachine = pMachine || {};
             }
         }
     }
-
     audio.handleFloat = handleFloat;
+
+    function selectVibe(id) {
+
+    }
+    audio.selectVibe = selectVibe;
 
 })(pMachine);

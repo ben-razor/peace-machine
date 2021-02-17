@@ -348,8 +348,9 @@ var pMachine = pMachine || {};
         });
 
         swiper.on('slideChange', function() {
-            swiper.updateProgress();
             console.log('slide changed', swiper.realIndex, pm.config["vibes"][swiper.realIndex]);
+            var vibeConfig = pm.config['vibes'][swiper.realIndex];
+            backend.selectVibe(vibeConfig['id']);
         });
     }
     

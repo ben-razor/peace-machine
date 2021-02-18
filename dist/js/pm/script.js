@@ -6,36 +6,37 @@ var pMachine = pMachine || {};
 (function(pm) {
 
     pm.config = {
+        "default_vibe": "beige_haze",
         "vibes": [
             {
                 "id": "beige_haze",
                 "text": "Beige Haze",
-                "img": ".jpg",
-                "audio": "beach.ogg"
+                "img": "sunset-1.jpg",
+                "audio": "beige_haze"
             },
             {
                 "id": "ocean_beach",
                 "text": "Ocean Beach",
                 "img": "beach.jpg",
-                "audio": "beach.ogg"
+                "audio": "ocean-1.wav"
             },
             {
                 "id": "zabriskie_point",
                 "text": "Zabriskie Point",
                 "img": "desert.jpg",
-                "audio": "desert.ogg"
+                "audio": "desert-loop-1.wav"
             },
             {
                 "id": "rabbit_hole",
                 "text": "Rabbit Hole",
                 "img": "garden.jpg",
-                "audio": "garden.ogg"
+                "audio": "forest-ambient-loop-1.wav"
             },
             {
                 "id": "bummer_trip",
                 "text": "Bummer Trip",
-                "img": "bummer_trip.jpg",
-                "audio": "bummer_trip.ogg"
+                "img": "bummer-trip.jpg",
+                "audio": "bummer-trip-1.wav"
             }
         ]
     };
@@ -314,6 +315,14 @@ var pMachine = pMachine || {};
         });
     }
     pm.turnOn = turnOn;
+
+    /**
+     * Can be called from the backend after initialisation is complete.
+     */
+    function handleTurnOn() {
+        backend.selectVibe(pm.config['default_vibe']);
+    }
+    pm.handleTurnOn = handleTurnOn;
 
     function dropOut() {
         backend.turnOff();

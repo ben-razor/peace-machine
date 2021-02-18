@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="pm-landing pm-landing-bg">
+    <div id="pm-landing-page" class="pm-landing pm-landing-bg">
       <div class="pm-landing pm-landing-page">
         <div class="pm-landing-page-panel">
           <div class="pm-landing-header">
@@ -71,6 +71,11 @@
         </div>
       </div>
     </div>
+    <script>
+      if(window.location.search.indexOf('resume') !== -1) {
+        document.getElementById('pm-landing-page').style.display = 'none';
+      }
+    </script>
 
     <div class="pm-tune-in pm-tune-in-bg" style="display: none">
       <div class="pm-tune-in pm-tune-in-page pm-screen-foreground" style="display: none">
@@ -83,12 +88,17 @@
         <div class="pm-tune-in-page-panel">
           <div class="pm-tune-in-header">
             <div class="pm-logo-tune-in-page"></div>
+            <div class="pm-instruction-text">
+              Choose your vibe &#x1F3B6;
+            </div>
+            <!--
             <div class="pm-tune-in-quote">
               "Downers Control - No highs &#x21b7; Super highs"
             </div>
             <div class="pm-tune-in-quote">
               "Uppers Control - Peace &#x21b7; Loud"
             </div>
+            -->
           </div>
 
           <div class="pm-tune-in-controls">

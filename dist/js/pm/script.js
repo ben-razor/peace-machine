@@ -30,7 +30,7 @@ var pMachine = pMachine || {};
                 "id": "rabbit_hole",
                 "text": "Rabbit Hole",
                 "img": "garden.jpg",
-                "audio": "forest-ambient-loop-1.wav"
+                "audio": "garden-1.wav"
             },
             {
                 "id": "bummer_trip",

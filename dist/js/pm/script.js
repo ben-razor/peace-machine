@@ -41,6 +41,8 @@ var pMachine = pMachine || {};
         ]
     };
 
+    pm.currentVibe = pm.config['default_vibe'];
+
     /*
      * When a rotatable element is touched, we set it as
      * the active element, all movement on the ui will then be
@@ -213,11 +215,9 @@ var pMachine = pMachine || {};
      * from storage.
      */
     function initUI() {
-        if(!isMobile()) {
-            $('.web-show').css('display', '');
-        }
-
         var ids = ["pm-control-uppers", "pm-control-downers"];
+
+        pm.currentVibe = getValue('currentVibe');
 
         for(var i = 0; i < ids.length; i++) {
             var id = ids[i];
@@ -320,7 +320,7 @@ var pMachine = pMachine || {};
      * Can be called from the backend after initialisation is complete.
      */
     function handleTurnOn() {
-        backend.selectVibe(pm.config['default_vibe']);
+        backend.selectVibe(pm.currentVibe);
     }
     pm.handleTurnOn = handleTurnOn;
 
@@ -336,6 +336,8 @@ var pMachine = pMachine || {};
     let swiper = null;
 
     function initVibesSwiper() {
+        let currentSlideIndex = getSlideIndex(pm.currentVibe);
+
         if(swiper) {
             swiper.destroy();
         }
@@ -354,32 +356,44 @@ var pMachine = pMachine || {};
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             },
+            initialSlide: currentSlideIndex
         });
 
         swiper.on('slideChange', function() {
             console.log('slide changed', swiper.realIndex, pm.config["vibes"][swiper.realIndex]);
             var vibeConfig = pm.config['vibes'][swiper.realIndex];
-            backend.selectVibe(vibeConfig['id']);
+            pm.currentVibe = vibeConfig['id'];
+            setValue('currentVibe', pm.currentVibe);
+            backend.selectVibe(pm.currentVibe);
         });
+    }
+
+    function getSlideIndex(vibeID) {
+        let slideIndex = pm.config['vibes'].findIndex(x => x['id'] === vibeID);
+        return slideIndex;
     }
     
     function tuneIn() {
         let $landingPage = $('.pm-landing');
         let $tuneInPage = $('.pm-tune-in');
 
-        $tuneInPage.fadeIn(1000, function() {
-            $tuneInPage.show();
+        $tuneInPage.css('opacity', 0);
+        $tuneInPage.show();
+        initVibesSwiper();
+        $tuneInPage.animate({'opacity': 1}, 1000, function() {
             $landingPage.hide();
-            initVibesSwiper();
-        })
+        });
     }
     pm.tuneIn = tuneIn;
 
     function tuneOut() {
         let $tuneInPage = $('.pm-tune-in');
-        $tuneInPage.fadeOut(1600, function() {
+
+        setTimeout(function() {
             $tuneInPage.hide();
-        })
+        }, 1000);
+
+        $tuneInPage.animate({'opacity': 0}, 1200);
     }
     pm.tuneOut = tuneOut;
 

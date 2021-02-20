@@ -3,10 +3,29 @@
     src: url(../font/hippie-movement/Hippie\ Movement.ttf);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    font-family: HippieMovement, Arial;
+    background-color: hsla(190, 50%, 70%, 1);
+}
+
 .pm-screen-background {
     width: 100%;
     height: 100vh;
-    background-color: hsla(185, 78%, 71%, 1);
+    background-color: hsla(190, 50%, 70%, 1);
     position: absolute;
     left: 0;
     top: 0;
@@ -68,7 +87,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    z-index: 100;
 }
 
 .pm-tune-in-bg {
@@ -92,7 +110,18 @@
     background-size: 20vh;
     width: 100%;
     height: 100%;
-    z-index: 101;
+}
+
+.pm-bottom-page {
+    z-index: 0;
+}
+
+.pm-middle-page {
+    z-index: 50;
+}
+
+.pm-top-page {
+    z-index: 100;
 }
 
 .pm-instruction-text {
@@ -167,24 +196,6 @@ button:hover, button:active, button:focus {
     flex-grow: 4;
     margin-top: 20%;
     overflow: visible;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  height: 100vh;
-  font-family: HippieMovement, Arial;
 }
 
 #wrapper {

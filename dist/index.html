@@ -17,65 +17,46 @@
     <script src="vendor/swiper/swiper-bundle.min.js"></script>
   </head>
   <body class="no-select">
-    <div class="pm-screen-background">
+    <div class="pm-screen-background" id="pm-main-page" style="display: none">
       <div class="pm-rays"></div>
-    </div>
 
-    <div class="pm-screen-foreground">
-      <div class="header">
-        <div class="pm-basis">
-          <div class="pm-logo"></div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="pm-foreground-basis">
-          <div class="pm-clouds">
-            <div class="pm-basis">
-              <div class="pm-cloud pm-cloud-downers"></div>
-              <div class="pm-cloud pm-cloud-uppers"></div>
-            </div>
-          </div>
-          <div class="pm-flowers">
-            <div class="pm-basis">
-              <div class="pm-stem pm-stem-downers"></div>
-              <div class="pm-stem pm-stem-uppers"></div>
-              <img id="pm-control-downers" class="pm-control rotatable" src="img/pm-screen-3-control-downers.png">
-              <img id="pm-control-uppers" class="pm-control rotatable" src="img/pm-screen-3-control-uppers.png">
-            </div>
+      <div class="pm-screen-foreground">
+          <div class="header">
+          <div class="pm-basis">
+            <div class="pm-logo"></div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="pm-screen-overlay">
-      <div class="pm-grass">
-        <div class="pm-tune-in-button">
-          <button onclick="pMachine.tuneIn()">&#9775; Tune In &#8679;</button>
-        </div>
-        <div class="pm-drop-out-button">
-          <button onclick="pMachine.dropOut()">&#9774; Drop Out &#8680;</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="pm-landing-page" class="pm-landing pm-landing-bg">
-      <div class="pm-landing pm-landing-page">
-        <div class="pm-landing-page-panel">
-          <div class="pm-landing-header">
-            <div class="pm-logo-landing-page"></div>
-            <div class="pm-landing-quote">
-              "A mellow sound generator that lets you chill"
+        <div class="content">
+          <div class="pm-foreground-basis">
+            <div class="pm-clouds">
+              <div class="pm-basis">
+                <div class="pm-cloud pm-cloud-downers"></div>
+                <div class="pm-cloud pm-cloud-uppers"></div>
+              </div>
+            </div>
+            <div class="pm-flowers">
+              <div class="pm-basis">
+                <div class="pm-stem pm-stem-downers"></div>
+                <div class="pm-stem pm-stem-uppers"></div>
+                <img id="pm-control-downers" class="pm-control rotatable" src="img/pm-screen-3-control-downers.png">
+                <img id="pm-control-uppers" class="pm-control rotatable" src="img/pm-screen-3-control-uppers.png">
+              </div>
             </div>
           </div>
-          <button onclick="pMachine.turnOn()" class="pm-turn-on-button">Turn On</button>
+        </div>
+      </div>
+  
+      <div class="pm-screen-overlay">
+        <div class="pm-grass">
+          <div class="pm-tune-in-button">
+            <button onclick="pMachine.tuneIn()">&#9775; Tune In &#8679;</button>
+          </div>
+          <div class="pm-drop-out-button">
+            <button onclick="pMachine.dropOut()">&#9774; Drop Out &#8680;</button>
+          </div>
         </div>
       </div>
     </div>
-    <script>
-      if(window.location.search.indexOf('resume') !== -1) {
-        document.getElementById('pm-landing-page').style.display = 'none';
-      }
-    </script>
 
     <div class="pm-tune-in pm-tune-in-bg" style="display: none">
       <div class="pm-tune-in pm-tune-in-page pm-screen-foreground" style="display: none">
@@ -139,6 +120,27 @@
         </div>
       </div>
     </div>
+
+    <div id="pm-landing-page" class="pm-landing pm-landing-bg pm-top-page">
+      <div class="pm-landing pm-landing-page">
+        <div class="pm-landing-page-panel">
+          <div class="pm-landing-header">
+            <div class="pm-logo-landing-page"></div>
+            <div class="pm-landing-quote">
+              "A mellow sound generator that lets you chill"
+            </div>
+          </div>
+          <button onclick="pMachine.turnOn()" class="pm-turn-on-button">Turn On</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      if(window.location.search.indexOf('resume') !== -1) {
+        document.getElementById('pm-landing-page').style.display = 'none';
+        document.getElementById('pm-main-page').style.display = '';
+      }
+    </script>
+
 
 
     <script src="vendor/jquery.min.js"></script>

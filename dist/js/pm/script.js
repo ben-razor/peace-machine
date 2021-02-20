@@ -38,8 +38,11 @@ var pMachine = pMachine || {};
                 "img": "bummer-trip.jpg",
                 "audio": "bummer-trip-1.wav"
             }
-        ]
+        ],
+        "page_fade_time": 1200
     };
+
+    const PAGE_FADE_TIME = pm.config["page_fade_time"];;
 
     pm.currentVibe = pm.config['default_vibe'];
 
@@ -313,9 +316,18 @@ var pMachine = pMachine || {};
         backend.turnOn();
         initUI();
         let $landingPage = $('.pm-landing');
-        $landingPage.fadeOut(1000, function() {
+        let $mainPage = $('#pm-main-page');
+        $mainPage.css('opacity', 0);
+        $mainPage.css('display', '');
+
+        $mainPage.addClass('pm-top-page');
+        $landingPage.removeClass('pm-top-page');
+
+        $landingPage.fadeOut(PAGE_FADE_TIME, function() {
             $landingPage.hide();
         });
+
+        $mainPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
     pm.turnOn = turnOn;
 
@@ -334,9 +346,13 @@ var pMachine = pMachine || {};
         backend.turnOff();
 
         let $landingPage = $('.pm-landing');
-        $landingPage.fadeIn(1600, function() {
-            $landingPage.show();
-        });
+        let $mainPage = $('#pm-main-page');
+
+        $landingPage.css('opacity', 0);
+        $landingPage.css('display', '');
+        $landingPage.addClass('pm-top-page');
+        $mainPage.removeClass('pm-top-page').addClass('pm-middle-page');
+        $landingPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
     pm.dropOut = dropOut;
     let swiper = null;
@@ -393,11 +409,14 @@ var pMachine = pMachine || {};
     function tuneIn() {
         let $landingPage = $('.pm-landing');
         let $tuneInPage = $('.pm-tune-in');
+        let $mainPage = $('pm-main-page');
+        $mainPage.removeClass('pm-top-page').addClass('pm-middle-page');
 
         $tuneInPage.css('opacity', 0);
+        $tuneInPage.addClass('pm-top-page');
         $tuneInPage.show();
         initVibesSwiper();
-        $tuneInPage.animate({'opacity': 1}, 1000, function() {
+        $tuneInPage.animate({'opacity': 1}, PAGE_FADE_TIME, function() {
             $landingPage.hide();
         });
     }
@@ -408,12 +427,17 @@ var pMachine = pMachine || {};
      */
     function tuneOut() {
         let $tuneInPage = $('.pm-tune-in');
+        let $mainPage = $('#pm-main-page');
+        $mainPage.css('opacity', 0);
+        $mainPage.addClass('pm-top-page');
+        $tuneInPage.removeClass('pm-top-page').addClass('pm-middle-page');
 
         setTimeout(function() {
             $tuneInPage.hide();
-        }, 1000);
+        }, PAGE_FADE_TIME);
 
-        $tuneInPage.animate({'opacity': 0}, 1200);
+        $tuneInPage.animate({'opacity': 0}, PAGE_FADE_TIME);
+        $mainPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
     pm.tuneOut = tuneOut;
 

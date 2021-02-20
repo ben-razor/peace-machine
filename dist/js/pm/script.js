@@ -306,6 +306,9 @@ var pMachine = pMachine || {};
         return val;
     }
 
+    /**
+     * Switch to the main page and call the backend to enable audio.
+     */
     function turnOn() {
         backend.turnOn();
         initUI();
@@ -324,6 +327,9 @@ var pMachine = pMachine || {};
     }
     pm.handleTurnOn = handleTurnOn;
 
+    /**
+     * Stop sounds and return to landing page.
+     */
     function dropOut() {
         backend.turnOff();
 
@@ -335,6 +341,9 @@ var pMachine = pMachine || {};
     pm.dropOut = dropOut;
     let swiper = null;
 
+    /**
+     * Initialize the swiper for choosing vibes.
+     */
     function initVibesSwiper() {
         let currentSlideIndex = getSlideIndex(pm.currentVibe);
 
@@ -368,11 +377,19 @@ var pMachine = pMachine || {};
         });
     }
 
+    /**
+     * Returns the slide index of the currently selected vibe.
+     * 
+     * @param {string} vibeID 
+     */
     function getSlideIndex(vibeID) {
         let slideIndex = pm.config['vibes'].findIndex(x => x['id'] === vibeID);
         return slideIndex;
     }
     
+    /**
+     * Switches to a panel where the user can select from different sounds.
+     */
     function tuneIn() {
         let $landingPage = $('.pm-landing');
         let $tuneInPage = $('.pm-tune-in');
@@ -386,6 +403,9 @@ var pMachine = pMachine || {};
     }
     pm.tuneIn = tuneIn;
 
+    /**
+     * Switches from the vibe chooser panel back to the main page.
+     */
     function tuneOut() {
         let $tuneInPage = $('.pm-tune-in');
 
@@ -406,6 +426,7 @@ var pMachine = pMachine || {};
     }
     pm.getVibesConfig = getVibesConfig;
 
+    backend.initAudio();
     initUI();
 
 })(pMachine);

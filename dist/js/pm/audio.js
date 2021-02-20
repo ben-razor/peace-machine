@@ -8,7 +8,6 @@ var pMachine = pMachine || {};
     var audioContext = null;
     var lpFilter = null;
     var gain = null;
-    var stoppingAudioTimer = null;
 
     /**
      * Set up master channel and call initVibes to load samples.
@@ -32,7 +31,6 @@ var pMachine = pMachine || {};
      * Called by front end when user activates listening to audio.
      */
     function turnOn() {
-        clearTimeout(stoppingAudioTimer);
         pm.handleTurnOn();
     }
     audio.turnOn = turnOn;
@@ -47,11 +45,6 @@ var pMachine = pMachine || {};
             let now = audioContext.currentTime;
             gain.gain.linearRampToValueAtTime(0, now + seconds);
         }
-
-        stoppingAudioTimer = setTimeout(function() {
-            audioContext.close();
-            audioContext = null;
-        }, seconds * 1000);
     }
     audio.turnOff = turnOff;
 

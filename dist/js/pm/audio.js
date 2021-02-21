@@ -8,6 +8,7 @@ var pMachine = pMachine || {};
     var audioContext = null;
     var lpFilter = null;
     var gain = null;
+    let turnedOn = false;
 
     /**
      * Set up master channel and call initVibes to load samples.
@@ -31,6 +32,7 @@ var pMachine = pMachine || {};
      * Called by front end when user activates listening to audio.
      */
     function turnOn() {
+        turnedOn = true;
         pm.handleTurnOn();
     }
     audio.turnOn = turnOn;
@@ -39,6 +41,7 @@ var pMachine = pMachine || {};
      * Called by front end when user deactivates audio.
      */
     function turnOff() {
+        turnedOn = false;
         let seconds = 2;
 
         if(audioContext) {
@@ -131,6 +134,7 @@ var pMachine = pMachine || {};
                         source.loop = true;
                         source.start(0);
                         sources[vibeID] = new Source(source).connect(connectTo).setVolume(0, 0);
+                        pm.handleVibeCreated(vibeID);
                     }, function(e) { "Error decoding audio" + e.err }); 
                 }
 
@@ -140,6 +144,7 @@ var pMachine = pMachine || {};
                 if(vibeID === 'beige_haze') {
                     createBrownNoise(audioCtx, connectTo).then((source) => {
                         sources[vibeID] = new Source(source).connect(connectTo).setVolume(0, 0);
+                        pm.handleVibeCreated(vibeID);
                     });
                 }
             }
@@ -177,13 +182,15 @@ var pMachine = pMachine || {};
      * @param {string} id 
      */
     function selectVibe(id) {
-        for(let sourceID of Object.keys(sources)) {
-            let source = sources[sourceID];
-            if(sourceID === id) {
-                source.setVolume(1, 1);
-            }
-            else {
-                source.setVolume(0, 1);
+        if(turnedOn) {
+            for(let sourceID of Object.keys(sources)) {
+                let source = sources[sourceID];
+                if(sourceID === id) {
+                    source.setVolume(1, 1);
+                }
+                else {
+                    source.setVolume(0, 1);
+                }
             }
         }
     }

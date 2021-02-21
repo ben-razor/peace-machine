@@ -317,15 +317,16 @@ var pMachine = pMachine || {};
         initUI();
         let $landingPage = $('.pm-landing');
         let $mainPage = $('#pm-main-page');
+        
+        $mainPage.stop();
+        $landingPage.stop();
         $mainPage.css('opacity', 0);
         $mainPage.css('display', '');
 
         $mainPage.addClass('pm-top-page');
         $landingPage.removeClass('pm-top-page');
 
-        $landingPage.fadeOut(PAGE_FADE_TIME, function() {
-            $landingPage.hide();
-        });
+        $landingPage.fadeOut(PAGE_FADE_TIME);
 
         $mainPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
@@ -348,6 +349,8 @@ var pMachine = pMachine || {};
         let $landingPage = $('.pm-landing');
         let $mainPage = $('#pm-main-page');
 
+        $landingPage.stop();
+        $mainPage.stop();
         $landingPage.css('opacity', 0);
         $landingPage.css('display', '');
         $landingPage.addClass('pm-top-page');
@@ -410,15 +413,18 @@ var pMachine = pMachine || {};
         let $landingPage = $('.pm-landing');
         let $tuneInPage = $('.pm-tune-in');
         let $mainPage = $('pm-main-page');
+
+        $landingPage.stop();
+        $tuneInPage.stop();
+        $mainPage.stop();
+
         $mainPage.removeClass('pm-top-page').addClass('pm-middle-page');
 
         $tuneInPage.css('opacity', 0);
         $tuneInPage.addClass('pm-top-page');
         $tuneInPage.show();
         initVibesSwiper();
-        $tuneInPage.animate({'opacity': 1}, PAGE_FADE_TIME, function() {
-            $landingPage.hide();
-        });
+        $tuneInPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
     pm.tuneIn = tuneIn;
 
@@ -428,14 +434,12 @@ var pMachine = pMachine || {};
     function tuneOut() {
         let $tuneInPage = $('.pm-tune-in');
         let $mainPage = $('#pm-main-page');
+        $tuneInPage.stop();
+        $mainPage.stop();
+        
         $mainPage.css('opacity', 0);
         $mainPage.addClass('pm-top-page');
         $tuneInPage.removeClass('pm-top-page').addClass('pm-middle-page');
-
-        setTimeout(function() {
-            $tuneInPage.hide();
-        }, PAGE_FADE_TIME);
-
         $tuneInPage.animate({'opacity': 0}, PAGE_FADE_TIME);
         $mainPage.animate({'opacity': 1}, PAGE_FADE_TIME);
     }
@@ -449,6 +453,19 @@ var pMachine = pMachine || {};
         return JSON.stringify(pm.config["vibes"]);
     }
     pm.getVibesConfig = getVibesConfig;
+
+    /**
+     * Called by backends when samples / generators have been created.
+     * 
+     * If that processor is the active one, it can start being used to 
+     * create sound
+     */
+    function handleVibeCreated(vibeID) {
+        if(vibeID === pm.currentVibe) {
+            backend.selectVibe(vibeID);
+        }
+    }
+    pm.handleVibeCreated = handleVibeCreated;
 
     backend.initAudio();
     initUI();

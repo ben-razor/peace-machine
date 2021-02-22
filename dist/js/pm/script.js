@@ -39,7 +39,9 @@ var pMachine = pMachine || {};
                 "audio": "bummer-trip-1.wav"
             }
         ],
-        "page_fade_time": 1200
+        "page_fade_time": 1200,
+        "default_downers": 1,
+        "default_uppers": 0.5
     };
 
     const PAGE_FADE_TIME = pm.config["page_fade_time"];;
@@ -256,6 +258,7 @@ var pMachine = pMachine || {};
         let value = 10**(dB / 20)
         return value;
     }
+    pm.dBToMul = dBToMul;
 
     /**
      * Converts a logarithic multiplier to a linear value
@@ -272,6 +275,23 @@ var pMachine = pMachine || {};
         val = physii.math.loneRanger(val, dBLow, dbHigh, 0, 1);
         return val;
     }
+
+    /**
+     * Converts to a linear value between 0 and 1 
+     * to a logarithic multiplier.
+     * 
+     * E.g. 0.5 -> -12dB -> 0.25 if the scale is from -24dB to 0.
+     * 
+     * @param {number} mul 
+     * @param {number} dBLow
+     * @param {number} dBHigh
+     */
+    function valToMul(val, dBLow, dbHigh) {
+        let db = physii.math.loneRanger(val, 0, 1, dBLow, dbHigh);
+        let mul = dBToMul(db);
+        return mul;
+    }
+    pm.valToMul = valToMul;
 
     /**
      * Converts a multiplier to dB. For example, -6dB is approx 
@@ -306,6 +326,18 @@ var pMachine = pMachine || {};
      */
     function getValue(key) {
         var val = JSON.parse(storage.getItem(key));
+
+        if(val === null) {
+            if(key === 'currentVibe') {
+                val = pm.config['default_vibe'];
+            }
+            if(key === 'pm-control-downers') {
+                val = pm.config['default_downers'];
+            }
+            else if(key === 'pm-control-uppers') {
+                val = valToMul(pm.config['default_uppers'], dBControlLow, dBControlHigh);
+            }
+        }
         return val;
     }
 

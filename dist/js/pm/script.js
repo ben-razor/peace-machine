@@ -436,7 +436,7 @@ var pMachine = pMachine || {};
         let $mainPage = $('#pm-main-page');
         $tuneInPage.stop();
         $mainPage.stop();
-        
+
         $mainPage.css('opacity', 0);
         $mainPage.addClass('pm-top-page');
         $tuneInPage.removeClass('pm-top-page').addClass('pm-middle-page');

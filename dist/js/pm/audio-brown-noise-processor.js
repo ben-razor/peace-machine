@@ -6,19 +6,18 @@
 
     process(inputs, outputs, parameters) {
         let output = outputs[0];
-        let channel1 = output[0]; 
-        let bufferSize = channel1.length;
         let val = 0;
 
-        for (var i = 0; i < bufferSize; i++) {
-            var white = Math.random() * 2 - 1;
-            val = (this.lastOut + (0.02 * white)) / 1.02;
-            this.lastOut = val;
+        output.forEach(channel => {
+            let bufferSize = channel.length;
 
-            output.forEach(channel => {
-                channel[i] = val * 2; // (roughly compensate for gain)
-            })
-        }
+            for (var i = 0; i < bufferSize; i++) {
+                var white = Math.random() * 2 - 1;
+                val = (this.lastOut + (0.02 * white)) / 1.02;
+                this.lastOut = val;
+                channel[i] = val * 2;
+            }
+        });
 
         return true;
     }

@@ -127,7 +127,7 @@ body {
 
 .pm-instruction-text {
     font-size: 1.8em;
-    text-shadow: 2px 2px hsl(210, 80%, 30%);
+    text-shadow: 2px 2px hsl(0, 0%, 30%);
     color: white;
 }
 

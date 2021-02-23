@@ -64,7 +64,7 @@ var pMachine = pMachine || {};
     var controlTranslation = 'translate(-50%, -50%) ';
 
     /** Low value on a db control */
-    var dBControlLow = -30;
+    var dBControlLow = -42;
 
     /** High value on a db control */
     var dBControlHigh = 0;
@@ -198,8 +198,14 @@ var pMachine = pMachine || {};
             let id = $elem.attr('id');
 
             if(id === 'pm-control-uppers') {
+                let minVal = dBToMul(dBControlLow);
                 let dBVal = physii.math.loneRanger(val, 0, 1, dBControlLow, dBControlHigh);
                 val = dBToMul(dBVal);
+
+                // Set volume to zero when control fully off
+                if(val - minVal < 0.001) {
+                    val = 0;
+                }
             }
 
             setValue(id, val);
@@ -311,6 +317,7 @@ var pMachine = pMachine || {};
      * @param {object} value 
      */
     function setValue(key, value) {
+        console.log(key, value);
         storage.setItem(key, JSON.stringify(value));
 
         if(backend) {

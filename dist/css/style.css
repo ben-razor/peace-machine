@@ -80,7 +80,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../img/pm-screen-grass-1.png);
+    background-image: url(../img/ui/pm-screen-grass-1.png);
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: 20vh;
@@ -105,7 +105,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../img/pm-screen-grass-1.png);
+    background-image: url(../img/ui/pm-screen-grass-1.png);
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: 20vh;
@@ -136,7 +136,7 @@ body {
 }
 
 .pm-rays-bg {
-    background-image: url(../img/pm-screen-rays-1.png);
+    background-image: url(../img/ui/pm-screen-rays-1.png);
     background-position-x: -150px;
     background-position-y: -150px;
     background-repeat: no-repeat;
@@ -231,7 +231,7 @@ button:hover, button:active, button:focus {
     left: 0;
     bottom: 0;
     position: absolute;
-    background-image: url(../img/pm-screen-grass-1.png);
+    background-image: url(../img/ui/pm-screen-grass-1.png);
     background-repeat: repeat-x;
     background-size: contain;
 }
@@ -242,13 +242,13 @@ button:hover, button:active, button:focus {
     left: -2%;
     top: 2%;
     position: absolute;
-    background-image: url(../img/pm-screen-logo-1.svg);
+    background-image: url(../img/ui/pm-screen-logo-1.svg);
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .pm-logo-landing-page {
-    background-image: url(../img/pm-screen-logo-1.svg);
+    background-image: url(../img/ui/pm-screen-logo-1.svg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
@@ -269,20 +269,20 @@ button:hover, button:active, button:focus {
     left: -10%;
     top: -10%;
     position: absolute;
-    background-image: url(../img/pm-screen-rays-1.svg);
+    background-image: url(../img/ui/pm-screen-rays-1.svg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .pm-cloud-downers {
     left: 28%;
-    background-image: url(../img/pm-screen-label-downers-1.svg);
+    background-image: url(../img/ui/pm-screen-label-downers-1.svg);
     background-size: contain;
 }
 
 .pm-cloud-uppers {
     left: 76%;
-    background-image: url(../img/pm-screen-label-uppers-1.svg);
+    background-image: url(../img/ui/pm-screen-label-uppers-1.svg);
     background-size: contain;
 }
 
@@ -308,7 +308,7 @@ button:hover, button:active, button:focus {
     bottom: 0;
     top: 0;
     transform: translateX(-86%);
-    background-image: url(../img/pm-screen-stem-1.png);
+    background-image: url(../img/ui/pm-screen-stem-1.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

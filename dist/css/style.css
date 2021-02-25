@@ -258,7 +258,7 @@ button:hover, button:active, button:focus {
 
 .pm-landing-quote {
     color: hsl(90, 80%, 100%);
-    font-size: 2.5em;
+    font-size: 3em;
     padding: 10px 0 0 10px;
     text-shadow: 3px 3px hsl(180, 80%, 30%);
 }
@@ -468,7 +468,7 @@ div.promo-button {
 
 @media screen and (max-width: 992px) {
     .pm-landing-quote {
-        font-size: 1.5em;
+        font-size: 2.5em;
     }
 }
 

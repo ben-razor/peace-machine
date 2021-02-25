@@ -2,4 +2,4 @@
 
 A mellow sound generator for the web.
 
-Hear it in action at https://peace-machine-9b07e.web.app/.
+Experience it at https://peace-machine-9b07e.web.app/

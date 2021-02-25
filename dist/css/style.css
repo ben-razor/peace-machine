@@ -157,7 +157,7 @@ body {
     font-size: 160%;
     width: 50%;
     margin: auto;
-    padding: 1em;
+    padding: 0.5em 1em;
     background-color: hsl(180, 80%, 30%);
     color: hsl(90, 80%, 100%);
     border-radius: 10% 50%;
@@ -409,58 +409,13 @@ button:hover, button:active, button:focus {
     left: 76%;
 }
 
-@media screen and (max-width: 992px) {
-    .pm-landing-quote {
-        font-size: 1.5em;
-    }
-}
-
-
-@media screen and (max-width: 768px) {
-    .pm-landing-page-panel {
-        width: 80%;
-        height: 80%;
-    }
-
-    .pm-landing-quote {
-        font-size: 2em;
-    }
-}
-
-@media screen and (max-width: 567px) {
-    .pm-landing-page-panel {
-        width: 90%;
-        height: 90%;
-    }
-    .pm-landing-header {
-        flex-direction: column;
-    }
-
-    .pm-turn-on-button {
-        width: 70%;
-        font-size: 180%;
-        padding: 0.5em;
-    }
-
-    .pm-screen-foreground {
-        flex-direction: column;
-    }
-
-    .content {
-        flex-grow: 4;
-    }
-
-    .pm-cloud {
-        width: 38%;
-    }
-
-    .pm-control {
-        width: 42%;
-    }
-
-    .pm-stem {
-        width: 15%;
-    }
+div.promo-button {
+    width: 20%;
+    left: 50%;
+    position: absolute;
+    bottom: 0;
+    z-index: 200;
+    transform: translateX(-50%);
 }
 
 .swiper-container {
@@ -495,4 +450,65 @@ button:hover, button:active, button:focus {
 }
 .pm-vibe-panel.bummer_trip {
     background-image: url(../img/vibes/bummer-trip-2.jpg);
+}
+
+@media screen and (max-width: 992px) {
+    .pm-landing-quote {
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .pm-landing-page-panel {
+        width: 80%;
+        height: 70%;
+    }
+
+    .pm-landing-quote {
+        font-size: 2em;
+    }
+
+    div.promo-button {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .pm-landing-page-panel {
+        width: 90%;
+        height: 70%;
+    }
+    .pm-landing-header {
+        flex-direction: column;
+    }
+
+    .pm-turn-on-button {
+        width: 70%;
+        font-size: 180%;
+        padding: 0.5em;
+    }
+
+    .pm-screen-foreground {
+        flex-direction: column;
+    }
+
+    .content {
+        flex-grow: 4;
+    }
+
+    .pm-cloud {
+        width: 38%;
+    }
+
+    .pm-control {
+        width: 42%;
+    }
+
+    .pm-stem {
+        width: 15%;
+    }
+
+    div.promo-button {
+        width: 50%;
+    }
 }

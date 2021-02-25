@@ -245,6 +245,10 @@ var pMachine = pMachine || {};
             var rot = valueToRot(val);
             $elem.css('transform', controlTranslation + ' rotate(' + rot + 'rad)');
         }
+
+        if(!isMobile()) {
+            $('.promo-button').show();
+        }
     }
 
     function isMobile() {

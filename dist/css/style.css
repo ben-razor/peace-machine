@@ -409,14 +409,27 @@ button:hover, button:active, button:focus {
     left: 76%;
 }
 
-div.promo-button {
-    width: 20%;
-    max-width: 14em;
-    left: 50%;
+@keyframes fullScale{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+div.promo-button-container {
     position: absolute;
     bottom: 0;
+    width: 100%;
+}
+
+div.promo-button {
+    animation: fullScale 2s;
+    width: 20%;
+    max-width: 14em;
     z-index: 200;
-    transform: translateX(-50%);
+    margin: auto;
 }
 
 .swiper-container {

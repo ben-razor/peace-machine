@@ -119,12 +119,11 @@ var pMachine = pMachine || {};
         for(let vibeConfig of vibeConfigs) {
             let fileName = vibeConfig['audio'];
             let isMobile = pm.isMobile();
-            /** 
-             * 
+
             if(!isMobile) {
                 fileName = fileName.replace('.wav', '.mp3');
             }
-            */
+            
             let vibeID = vibeConfig['id'];
 
             let isSample = fileName.indexOf('.') != -1;

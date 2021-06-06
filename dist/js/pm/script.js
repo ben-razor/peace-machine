@@ -254,6 +254,7 @@ var pMachine = pMachine || {};
     function isMobile() {
         return "PeaceMachineInterface" in window;
     }
+    pm.isMobile = isMobile;
 
     /**
      * Converts a value in dB to a multiplier.
@@ -321,7 +322,6 @@ var pMachine = pMachine || {};
      * @param {object} value 
      */
     function setValue(key, value) {
-        console.log(key, value);
         storage.setItem(key, JSON.stringify(value));
 
         if(backend) {
@@ -431,7 +431,6 @@ var pMachine = pMachine || {};
         });
 
         swiper.on('slideChange', function() {
-            console.log('slide changed', swiper.realIndex, pm.config["vibes"][swiper.realIndex]);
             var vibeConfig = pm.config['vibes'][swiper.realIndex];
             pm.currentVibe = vibeConfig['id'];
             setValue('currentVibe', pm.currentVibe);
@@ -510,7 +509,6 @@ var pMachine = pMachine || {};
     }
     pm.handleVibeCreated = handleVibeCreated;
 
-    backend.initAudio();
     initUI();
 
 })(pMachine);

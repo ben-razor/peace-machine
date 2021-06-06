@@ -1,5 +1,7 @@
 'use strict';
 
+// const { is } = require("core-js/core/object");
+
 /** @suppress {duplicate} */
 var pMachine = pMachine || {};
 
@@ -32,6 +34,7 @@ var pMachine = pMachine || {};
      * Called by front end when user activates listening to audio.
      */
     function turnOn() {
+        initAudio();
         turnedOn = true;
         pm.handleTurnOn();
     }
@@ -114,13 +117,20 @@ var pMachine = pMachine || {};
         let vibeConfigs = pm.config['vibes'];
 
         for(let vibeConfig of vibeConfigs) {
-            let audio = vibeConfig['audio'];
+            let fileName = vibeConfig['audio'];
+            let isMobile = pm.isMobile();
+            /** 
+             * 
+            if(!isMobile) {
+                fileName = fileName.replace('.wav', '.mp3');
+            }
+            */
             let vibeID = vibeConfig['id'];
 
-            let isSample = audio.indexOf('.') != -1;
+            let isSample = fileName.indexOf('.') != -1;
             if(isSample) {
                 let request = new XMLHttpRequest();
-                request.open('GET', 'audio/' + audio, true);
+                request.open('GET', 'audio/' + fileName, true);
                 request.responseType = 'arraybuffer';
                 request.vibeID = vibeID;
                 request.onload = function() {
@@ -162,7 +172,6 @@ var pMachine = pMachine || {};
         if(audioContext) {
             let now = audioContext.currentTime;
 
-            console.log(JSON.stringify([id, val]));
             if(id == 'pm-control-downers') {
                 lpFilter.frequency.linearRampToValueAtTime(val * 800, now + t);
             }

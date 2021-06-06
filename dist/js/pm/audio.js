@@ -11,22 +11,26 @@ var pMachine = pMachine || {};
     var lpFilter = null;
     var gain = null;
     let turnedOn = false;
+    let isInitialized = false;
 
     /**
      * Set up master channel and call initVibes to load samples.
      */
     function initAudio() {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioContext = new AudioContext();
+        if(!isInitialized) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioContext = new AudioContext();
 
-        lpFilter = audioContext.createBiquadFilter();
-        gain = audioContext.createGain();
-        gain.gain.value = 0;
+            lpFilter = audioContext.createBiquadFilter();
+            gain = audioContext.createGain();
+            gain.gain.value = 0;
 
-        gain.connect(audioContext.destination);
-        lpFilter.connect(gain);
- 
-        initVibes(audioContext, lpFilter);
+            gain.connect(audioContext.destination);
+            lpFilter.connect(gain);
+    
+            initVibes(audioContext, lpFilter);
+            isInitialized = true;
+        }
     }
     audio.initAudio = initAudio;
 
@@ -123,7 +127,7 @@ var pMachine = pMachine || {};
             if(!isMobile) {
                 fileName = fileName.replace('.wav', '.mp3');
             }
-            
+
             let vibeID = vibeConfig['id'];
 
             let isSample = fileName.indexOf('.') != -1;

@@ -24,7 +24,7 @@ body {
 
 .pm-screen-background {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: hsla(190, 50%, 70%, 1);
     position: absolute;
     left: 0;
